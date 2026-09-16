@@ -1,14 +1,14 @@
 cmake_minimum_required(VERSION 3.23.1)
 
 # General setup
-set(PROJECT_NAME "jucetemplate")
+set(PROJECT_NAME "test-plugin-3")
 set(CURRENT_VERSION "0.0.1")
-set(PRODUCT_NAME "jucetemplate")
+set(PRODUCT_NAME "test-plugin-3")
 set(COMPANY_NAME "Tom Sylva")
-set(BUNDLE_ID "com.viatordsp.jucetemplate")
+set(BUNDLE_ID "com.viatordsp.test-plugin-3")
 set(FORMATS Standalone AU VST3)
 
-project(jucetemplate VERSION 0.0.1)
+project(test-plugin-3 VERSION 0.0.1)
 
 add_subdirectory(modules/JUCE)
 
@@ -80,7 +80,7 @@ target_compile_definitions(SharedCode INTERFACE
         CMAKE_BUILD_TYPE="${CMAKE_BUILD_TYPE}"
         VERSION="${CURRENT_VERSION}"
         JUCE_DISPLAY_SPLASH_SCREEN=0
-        PRODUCT_NAME_WITHOUT_VERSION="jucetemplate"
+        PRODUCT_NAME_WITHOUT_VERSION="test-plugin-3"
         JUCE_ENABLE_REPAINT_DEBUGGING=0
 )
 

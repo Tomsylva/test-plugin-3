@@ -7,7 +7,7 @@ AudioPluginAudioProcessorEditor::AudioPluginAudioProcessorEditor(AudioPluginAudi
 {
     juce::ignoreUnused(processorRef);
 
-    addAndMakeVisible(square);
+    // addAndMakeVisible(square);
 
     setSize(600, 400);
 }
@@ -24,10 +24,10 @@ void AudioPluginAudioProcessorEditor::paint(juce::Graphics &g)
 
     g.setColour(juce::Colours::yellow);
     g.setFont(30.0f);
-    g.drawFittedText("Hello World!", getLocalBounds(), juce::Justification::centred, 1);
+    g.drawFittedText("Meeeeeeeep", getLocalBounds(), juce::Justification::centred, 1);
 }
 
 void AudioPluginAudioProcessorEditor::resized()
 {
-    square.setBounds(100, 100, 200, 200);
+    // square.setBounds(100, 100, 200, 200);
 }

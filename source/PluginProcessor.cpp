@@ -89,6 +89,7 @@ void AudioPluginAudioProcessor::prepareToPlay(double sampleRate, int samplesPerB
     // Use this method as the place to do any pre-playback
     // initialisation that you need..
     juce::ignoreUnused(sampleRate, samplesPerBlock);
+    sinewave.prepare(sampleRate, getTotalNumInputChannels());
 }
 
 void AudioPluginAudioProcessor::releaseResources()
@@ -150,6 +151,8 @@ void AudioPluginAudioProcessor::processBlock(juce::AudioBuffer<float> &buffer,
         juce::ignoreUnused(channelData);
         // ..do something to the data...
     }
+
+    sinewave.process(buffer);
 }
 
 //==============================================================================

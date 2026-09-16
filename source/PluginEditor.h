@@ -1,7 +1,7 @@
 #pragma once
 
 #include "PluginProcessor.h"
-#include "Square.h"
+// #include "Square.h"
 
 //==============================================================================
 class AudioPluginAudioProcessorEditor final : public juce::AudioProcessorEditor
@@ -15,7 +15,7 @@ public:
     void resized() override;
 
 private:
-    Square square;
+    // Square square;
 
     AudioPluginAudioProcessor &processorRef;
 
