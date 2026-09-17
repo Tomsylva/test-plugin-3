@@ -17,6 +17,10 @@ public:
 private:
     // Square square;
 
+    juce::Slider frequencySlider;
+    juce::TextButton playButton;
+    juce::Label frequencyLabel{"FrequencyLabel", "Frequency"};
+
     AudioPluginAudioProcessor &processorRef;
 
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR(AudioPluginAudioProcessorEditor)
