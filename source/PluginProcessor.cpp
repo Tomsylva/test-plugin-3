@@ -10,7 +10,8 @@ AudioPluginAudioProcessor::AudioPluginAudioProcessor()
 #endif
                          .withOutput("Output", juce::AudioChannelSet::stereo(), true)
 #endif
-      )
+                         ),
+      state(*this, nullptr, "parameters", createParameters())
 {
 }
 
@@ -90,6 +91,9 @@ void AudioPluginAudioProcessor::prepareToPlay(double sampleRate, int samplesPerB
     // initialisation that you need..
     juce::ignoreUnused(sampleRate, samplesPerBlock);
     sinewave.prepare(sampleRate, getTotalNumInputChannels());
+
+    frequencyParam = state.getRawParameterValue("freqHz");
+    playParam = state.getRawParameterValue("play");
 }
 
 void AudioPluginAudioProcessor::releaseResources()
@@ -152,6 +156,12 @@ void AudioPluginAudioProcessor::processBlock(juce::AudioBuffer<float> &buffer,
         // ..do something to the data...
     }
 
+    const float freq = frequencyParam->load();
+    const bool shouldBePlaying = static_cast<bool>(playParam->load());
+
+    sinewave.setFrequency(freq);
+    sinewave.setAmplitude(shouldBePlaying ? 0.4f : 0.0f);
+
     sinewave.process(buffer);
 }
 
@@ -187,4 +197,11 @@ void AudioPluginAudioProcessor::setStateInformation(const void *data, int sizeIn
 juce::AudioProcessor *JUCE_CALLTYPE createPluginFilter()
 {
     return new AudioPluginAudioProcessor();
+}
+
+juce::AudioProcessorValueTreeState::ParameterLayout AudioPluginAudioProcessor::createParameters()
+{
+    return {
+        std::make_unique<juce::AudioParameterFloat>(juce::ParameterID{"freqHz"}, "Frequency", 20.0f, 20000.0f, 220.0f),
+        std::make_unique<juce::AudioParameterBool>(juce::ParameterID{"play"}, "Play", true)};
 }

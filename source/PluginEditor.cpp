@@ -3,15 +3,12 @@
 
 //==============================================================================
 AudioPluginAudioProcessorEditor::AudioPluginAudioProcessorEditor(AudioPluginAudioProcessor &p)
-    : AudioProcessorEditor(&p), processorRef(p)
+    : AudioProcessorEditor(&p), processorRef(p), freqSliderAttachment(processorRef.getState(), "freqHz", frequencySlider), playButtonAttachment(processorRef.getState(), "play", playButton)
 {
     juce::ignoreUnused(processorRef);
 
-    // addAndMakeVisible(square);
-
     frequencySlider.setSliderStyle(juce::Slider::SliderStyle::LinearVertical);
     frequencySlider.setTextBoxStyle(juce::Slider::TextBoxBelow, true, 50, 25);
-    frequencySlider.setRange(0.0f, 1.0f, 0.01);
 
     addAndMakeVisible(frequencySlider);
 
@@ -45,15 +42,10 @@ void AudioPluginAudioProcessorEditor::paint(juce::Graphics &g)
 {
     // (Our component is opaque, so we must completely fill the background with a solid colour)
     g.fillAll(getLookAndFeel().findColour(juce::ResizableWindow::backgroundColourId));
-
-    // g.setColour(juce::Colours::yellow);
-    // g.setFont(30.0f);
-    // g.drawFittedText("Meeeeeeeep", getLocalBounds(), juce::Justification::centred, 1);
 }
 
 void AudioPluginAudioProcessorEditor::resized()
 {
-    // square.setBounds(100, 100, 200, 200);
     frequencySlider.setBounds(getWidth() / 2 - 50, getHeight() / 2 - 100, 100, 200);
     playButton.setBounds(getWidth() / 2 - 50, getHeight() / 2 + 120, 100, 20);
     frequencyLabel.setBounds(getWidth() / 2 - 50, getHeight() / 2 - 120, 100, 20);

@@ -15,10 +15,10 @@ public:
     [[nodiscard]] float getFrequency() const { return frequency; }
 
     void setAmplitude(const float newAmplitude) { amplitude = newAmplitude; }
-    void setFrequency(const float newFrequency) { amplitude = newFrequency; }
+    void setFrequency(const float newFrequency) { frequency = newFrequency; }
 
 private:
-    float amplitude = 0.00f;
+    float amplitude = 0.02f;
     float frequency = 440.0f;
     float currentSampleRate = 0.0f;
     float timeIncrement = 0.0f;
