@@ -12,17 +12,18 @@ public:
     void process(juce::AudioBuffer<float> &buffer);
 
     [[nodiscard]] float getAmplitude() const { return amplitude; }
-    [[nodiscard]] float getFrequency() const { return frequency; }
+    [[nodiscard]] float getFrequency() { return smoothedFreq.getNextValue(); }
 
     void setAmplitude(const float newAmplitude) { amplitude = newAmplitude; }
-    void setFrequency(const float newFrequency) { frequency = newFrequency; }
+    void setFrequency(const float newFrequency) { smoothedFreq.setTargetValue(newFrequency); }
 
 private:
     float amplitude = 0.02f;
-    float frequency = 440.0f;
     float currentSampleRate = 0.0f;
     float timeIncrement = 0.0f;
     std::vector<float> currentTime;
+
+    juce::SmoothedValue<float, juce::ValueSmoothingTypes::Multiplicative> smoothedFreq;
 };
 
 #endif // SINEWAVE_H
